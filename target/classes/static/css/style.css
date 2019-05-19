@@ -1,0 +1,46 @@
+body {
+    padding-top: 50px;
+}
+.navbar-inverse{
+    background-color: #3b5998 !important;
+}
+.starter-template {
+    padding: 40px 15px;
+    text-align: center;
+}
+#textStory{
+    height: 150px;
+}
+#newStory{
+    margin-bottom: 20px;
+}
+
+#storyContent{
+    float: left;
+    width: 90%;
+}
+
+.commentaires{
+     margin-top: 30px;
+     border-color: #89a4e0;
+     border-style: groove;
+     border-width: 3px;
+     border-radius: 5px;
+     padding: 20px;
+     background-color: #8abaea59
+ }
+
+.commentaires form{
+    padding: 25px;
+}
+
+.commentaires form input{
+    width: 75%;
+    float: left;
+}
+
+#comm{
+
+    width: 80%;
+    float: left;
+}
