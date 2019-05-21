@@ -24,6 +24,10 @@ center{
     padding: 15px;
 }
 
+#login-warning{
+    color: red;
+}
+
 #sign{
     margin-top: 15px;
 }

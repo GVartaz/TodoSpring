@@ -7,19 +7,18 @@ public class PublicationService {
 
     private TaskRepository taskRepository;
 
-    private LoginRepository loginRepository;
-
     public PublicationService(TaskRepository taskRepository) {
         this.taskRepository = taskRepository;
     }
 
-    public void share(Task task){
+    public void save(Task task){
         taskRepository.save(task);
     }
 
+    public void updateCB(Task task) { taskRepository.updateCB(task); }
+
+    public void updateTask(Task task) { taskRepository.updateTask(task); }
+
     public void deleteTask(int id) { taskRepository.deleteTask(id); }
 
-    public void register(Users user) { loginRepository.register(user);}
-
-    public Object getUser(String username) { return loginRepository.getUser(username); }
 }

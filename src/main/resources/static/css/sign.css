@@ -28,6 +28,10 @@ center{
     padding: 15px;
 }
 
+#register-warning{
+    color: red;
+}
+
 #loginForm{
     padding: 15px;
 }

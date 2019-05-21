@@ -7,7 +7,7 @@ app.controller('indexController',function ($scope, $http){
     }
 
     $scope.login = function(){
-        window.location.href = "/login";
+        window.location.href = "/login.html";
     }
 
     $scope.register = function(){
@@ -17,90 +17,150 @@ app.controller('indexController',function ($scope, $http){
 })
 
 app.controller('LoginController',function($scope,$http){
-    $scope.formLogin = {};
-
+/*
     $scope.connexion = function(){
-        var login = document.getElementById("login");
-        var pwd = document.getElementById("password");
-        if(login.value == ""){
-            login.style.borderColor = "#FF0000";
+        var username = $scope.username;
+        var password = $scope.password;
+        $scope.warning ="";
+
+        if(typeof username === "undefined"){
+            document.getElementById("username").style.borderColor = "#FF0000";
         }
-        if(pwd.value == ""){
-            pwd.style.borderColor = "#FF0000";
+        else if(typeof password === "undefined"){
+            document.getElementById("password").style.borderColor = "#FF0000";
         }
-        if(login.value != "" && pwd.value != "" ){
-            login.style.borderColor = null;
-            pwd.style.borderColor = null;
-            $http.post('/connexion',$scope.formLogin).then(function(resp){
-                if(resp.data == false){
-                    alert("Identifiants incorrects");
-                    login.value = "";
-                    pwd.value = "";
-                } else {
-                    $scope.formLogin = {};
-                    window.location.href = "./feed.html";
-                    alert("Connexion réussie");
-                }
+        else {
+            var req = {
+                username : username,
+                password : password
+            };
+            document.getElementById("username").style.borderColor = null;
+            document.getElementById("password").style.borderColor = null;
+            console.log(req);
+            $http.post('/connexion',req)
+                .then(function(resp){
+                    if(resp.data == false){
+                        $scope.username = "";
+                        $scope.password = "";
+                        $scope.warning = "Identifiants incorrects";
+                    } else {
+                        alert("Connexion réussie");
+                        window.location.href = "/feed.html";
+                    }
             });
         }
-    };
+    };*/
 })
 
 app.controller('InscriptionController',function ($scope, $http){
 
     $scope.createUser = function(){
-        var login = document.getElementById("login");
-        var pwd = document.getElementById("password");
-        if(login.value == ""){
-            login.style.borderColor = "#FF0000";
+
+        var username = $scope.username;
+        var password = $scope.password;
+        var password2 = $scope.password2;
+
+        if(password2 != password) {
+            $scope.warning = "Les 2 mots de passe ne sont pas identiques";
+            return;
         }
-        if(pwd.value == ""){
-            pwd.style.borderColor = "#FF0000";
+
+        if(typeof username === "undefined"){
+            document.getElementById("username").style.borderColor = "#FF0000";
         }
-        if(login.value != "" && pwd.value != "" ){
-            login.style.borderColor = null;
-            pwd.style.borderColor = null;
-            $http.get('/checkUsers/'+login.value).then(function(resp){
-                if(resp.data != null) {
-                    login.style.borderColor = "#FF0000";
-                    alert("Identifiant déjà utilisé. Veuillez en choisir un autre");
-                    login.value = "";
-                    pwd.value = "";
-                } else {
-                    $http.post('/inscription', $scope.formLogin).then(function (resp) {
-                        $scope.formLogin = {};
-                        window.location.href = "/feed.html";
-                        alert("Inscription réussie");
-                    });
-                }
-            });
+        else if(typeof password === "undefined"){
+            document.getElementById("password").style.borderColor = "#FF0000";
+        }
+        else if(typeof password2 === "undefined"){
+            document.getElementById("password2").style.borderColor = "#FF0000";
+        }
+        else {
+            var req = {
+                username : username,
+                password : password
+            };
+
+            document.getElementById("username").style.borderColor = null;
+            document.getElementById("password").style.borderColor = null;
+            document.getElementById("password2").style.borderColor = null;
+            $http.post("/inscription", req)
+                .then(function (resp) {
+                    console.log(resp);
+                    location.href = "/feed.html";
+                }).catch(function(e) {
+                    if(e.status == 500){
+                        $scope.warning = "Identifiant déjà utilisé! Veuillez en choisir un autre";
+                    }
+                }).then(function(e) {
+                    $scope.username = "";
+                });
+
         }
     };
 
 })
 
-app.controller('MainController',function ($scope, $http){
-    $http.get('/feed').then(function(resp){
-        $scope.tasks = resp.data;
-    });
+app.controller('MainController',function ($scope, $http) {
 
-    $scope.share = function(){
-        $http.post('/task',$scope.task).then(function(resp){
-            $scope.task= "";
-            window.location.reload();
+        /*$http.get('/feed').then(function (resp) {
+        $scope.tasks = resp.data;
+    });*/
+
+    $scope.refresh = function(){
+        $http.get('/feed').then(function (resp) {
+            $scope.tasks = resp.data;
         });
+    };
+
+    $scope.refresh();
+
+    $scope.logout = function(){
+        window.location.href = "/logout";
     }
 
-    $scope.comment = function(id){
-        $http.post('/comment/'+id,document.getElementById("commentaireStory"+id).value).then(function(resp){
-            $scope.commentaire= "";
-            window.location.reload();
+    $scope.createTask = function () {
+        $http.post('/task', $scope.content).then(function (resp) {
+            $scope.content = "";
+            $scope.refresh();
+        });
+    };
+
+    $scope.openEdit = function (id) {
+        var text = document.getElementById("text" + id);
+        var btnValid = document.getElementById("btn" + id);
+        var btnEdit = document.getElementById("modif" + id);
+        btnEdit.style.display = "none";
+        text.value = "";
+        text.style.display = "inline";
+        btnValid.style.display = "inline";
+    };
+
+    $scope.update = function (id) {
+        var text = document.getElementById("text" + id);
+        var btnValid = document.getElementById("btn" + id);
+        var btnEdit = document.getElementById("modif" + id);
+        btnEdit.style.display = "inline";
+        text.style.display = "none";
+        btnValid.style.display = "none";
+        if (text.value == "") {
+
+        } else {
+            $http.put('/updateTask', {id: id, content: text.value}).then(function (resp) {
+                $scope.modif = "";
+                $scope.refresh();
+            });
+        }
+    }
+
+    $scope.switch = function (id, done) {
+        $http.put('/updateCB', {id: id, done: done}).then(function (resp) {
+            $scope.refresh();
         });
     }
 
     $scope.deleteTask = function(id){
         $http.delete("/deleteTask/"+id).then(function(resp){
-            window.location.reload();
+            $scope.refresh();
         })
     }
 

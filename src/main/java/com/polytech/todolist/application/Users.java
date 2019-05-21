@@ -11,6 +11,8 @@ public class Users {
     private String username;
     @Column(name="password")
     private String password;
+    @Column(name="enabled")
+    private boolean enabled;
 
     @OneToMany()
     @JoinColumn(name="ID_STORY")
@@ -27,6 +29,14 @@ public class Users {
     public Users(String username, List<Task> tasks) {
         this.username = username;
         this.tasks = tasks;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public String getUsername() {

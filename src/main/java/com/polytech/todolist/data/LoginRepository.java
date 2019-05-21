@@ -6,6 +6,8 @@ public interface LoginRepository {
 
     void register(Users user);
 
-    Object getUser(String username);
+    boolean getUser(Users user);
+
+    Object checkUsername(String user);
 
 }

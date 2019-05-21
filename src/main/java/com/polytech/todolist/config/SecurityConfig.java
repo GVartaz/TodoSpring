@@ -28,12 +28,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception{
+        /*http.authorizeRequests()
+                .mvcMatchers("/", "/login**", "/creation", "/register", "/css/**", "/js/**").permitAll()
+                .anyRequest().authenticated()
+                .and().formLogin().loginPage("/login")
+                .and().formLogin().failureUrl("/login?error")
+                .and().formLogin().defaultSuccessUrl("/", true)
+                .and().csrf().disable();
+*/
         http.authorizeRequests()
                 .mvcMatchers("/admin/*").hasRole("Admin")
-                .mvcMatchers("/","/register.html","/login.html").permitAll()
+                .mvcMatchers("/","/register.html","/login.html","/connexion","/inscription","/js/*","/css/*","/images/*").permitAll()
                 .anyRequest().authenticated()
-                .and().formLogin().loginPage("/login.html")
-                .and().csrf().disable();
+                .and().formLogin().loginPage("/login.html").loginProcessingUrl("/login").defaultSuccessUrl("/feed.html",true).permitAll()
+                .and().csrf().disable()
+                .logout().logoutSuccessUrl("/");
 
         /*http.authorizeRequests()
                 .anyRequest().authenticated()

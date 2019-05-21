@@ -2,26 +2,36 @@ package com.polytech.todolist.presentation;
 
 import com.polytech.todolist.application.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 public class LoginController {
 
     @Autowired
-    PublicationService publicationService;
+    UserService userService;
 
-    @GetMapping("/getUsers/{username}")
-    public Object getUser(@PathVariable String username){
-       return publicationService.getUser(username);
+    @PostMapping("/connexion")
+    public boolean getUser(@RequestBody Users user){
+       return userService.getUser(user);
     }
 
     @PostMapping("/inscription")
-    public void register(@RequestBody Users user){
-        publicationService.register(user);
+    public void register(@RequestBody Users user) {
+
+        user.setEnabled(true);
+
+        String password = user.getPassword();
+        password = new BCryptPasswordEncoder().encode(password);
+        user.setPassword(password);
+
+        userService.register(user);
+    }
+
+    @PostMapping("/check")
+    public Object checkUsername(@RequestBody String username){
+        return userService.checkUsername(username);
     }
 
 }

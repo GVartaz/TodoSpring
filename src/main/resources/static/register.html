@@ -30,11 +30,15 @@
         <h3>Inscription</h3>
         <form id="loginForm">
             <p>
-                Login : <input type="text" id="login" required style="margin-bottom: 10px;" placeholder="Mon login" ng-model="formLogin.login">
+                Login : <input type="text" id="username" required style="margin-bottom: 10px;" placeholder="Mon login" ng-model="username">
             </p>
             <p>
-                Mot de passe : <input required id="password" type="password" style="margin-bottom: 10px;" ng-model="formLogin.pwd">
+                Mot de passe : <input required id="password" type="password" style="margin-bottom: 10px;" ng-model="password">
             </p>
+            <p>
+                Mot de passe : <input required id="password2" type="password" style="margin-bottom: 10px;" ng-model="password2">
+            </p>
+            <p id="register-warning" ng-bind="warning"></p>
             <button type="submit" class="btn btn-success" ng-click="createUser()">Valider l'inscription</button>
         </form>
     </div>
