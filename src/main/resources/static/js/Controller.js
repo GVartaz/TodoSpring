@@ -6,14 +6,6 @@ app.controller('indexController',function ($scope, $http){
         window.location.href = "/feed.html";
     }
 
-    $scope.login = function(){
-        window.location.href = "/login.html";
-    }
-
-    $scope.register = function(){
-        window.location.href = "/register.html";
-    }
-
 })
 
 app.controller('LoginController',function($scope,$http){

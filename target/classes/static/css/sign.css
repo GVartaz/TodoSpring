@@ -1,13 +1,9 @@
 #entete{
-    background-image:linear-gradient(rgb(138, 140, 206), rgb(122, 122, 218));
+    background-color:#FFD34E;
 }
 
 center{
     padding: 25px;
-}
-
-#entete{
-    background-image:linear-gradient(rgb(138, 140, 206), rgb(122, 122, 218));
 }
 
 center{
