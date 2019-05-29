@@ -37,13 +37,13 @@ center h1 img{
 }
 
 #task{
-    margin-top: 10px;
-    margin-bottom: 10px;
     border-style: groove;
     border-width: 1px;
     border-color: rgb(122, 122, 218);
     border-radius: 5px;
     background-color: rgba(202, 202, 202, 0.7);
+    width:75%;
+    margin: 25px auto;
 }
 
 #liste h4{

@@ -82,8 +82,10 @@ app.controller('MainController',function ($scope, $http) {
         var text = document.getElementById("text" + id);
         var btnValid = document.getElementById("btn" + id);
         var btnEdit = document.getElementById("modif" + id);
+        var content = document.getElementById("nomTache" + id);
+        content.style.display = "none";
         btnEdit.style.display = "none";
-        text.value = "";
+        text.value = content.innerText.trim();
         text.style.display = "inline";
         btnValid.style.display = "inline";
     };
@@ -92,17 +94,15 @@ app.controller('MainController',function ($scope, $http) {
         var text = document.getElementById("text" + id);
         var btnValid = document.getElementById("btn" + id);
         var btnEdit = document.getElementById("modif" + id);
+        var content = document.getElementById("nomTache" + id);
+        content.style.display = "inline";
         btnEdit.style.display = "inline";
         text.style.display = "none";
         btnValid.style.display = "none";
-        if (text.value == "") {
-
-        } else {
             $http.put('/updateTask', {id: id, content: text.value}).then(function (resp) {
                 $scope.modif = "";
                 $scope.refresh();
             });
-        }
     }
 
     $scope.switch = function (id, done) {

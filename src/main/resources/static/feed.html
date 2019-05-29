@@ -30,15 +30,20 @@
                         <!--<input type="checkbox" id="done{{x._id}}" ng-change="switch(x._id)" ng-checked="x.done" ng-model="formData.check">-->
                         <div id="content" ng-if="task.done">
                             <img src="images/checked.png" alt="Task done" ng-click="switch(task.id,task.done)">
-                            <del>{{ task.content }}</del>
+                            <div id="nomTache{{task.id}}" style="display: inline">
+                                <del>{{ task.content }}</del>
+                            </div>
+                            <input style="display: none; margin-right: 10px;" id="text{{task.id}}" type="text" ng-model="modif">
                         </div>
                         <div id="content" ng-if="!task.done">
                             <img src="images/unchecked.png" alt="Task not done" ng-click="switch(task.id,task.done)">
-                            {{ task.content }}
+                            <div id="nomTache{{task.id}}" style="display: inline">
+                                {{ task.content }}
+                            </div>
+                            <input style="display: none; margin-right: 10px;" id="text{{task.id}}" type="text" ng-model="modif">
                         </div>
                     </div>
                     <div id="modifTask">
-                        <input style="display: none; margin-right: 10px;" id="text{{task.id}}" type="text" placeholder="Ma tache" ng-model="modif">
                         <button style="display: none;" id="btn{{task.id}}" class="btn btn-primary" ng-click="update(task.id)"> Valider </button>
                         <button class="btn btn-primary" id="modif{{task.id}}" ng-click="openEdit(task.id)"> Modifier </button>
                         <button id="delTask" class="btn btn-danger" ng-click="deleteTask(task.id)"> x </button>
