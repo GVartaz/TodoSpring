@@ -2,12 +2,30 @@
     background-color:#FFD34E;
 }
 
+#entete h4{
+    float: right;
+    margin-top: 30px;
+    margin-right: 20px;
+    background-color: #f5f6f7;
+    border-style: groove;
+    border-width: 1px;
+    border-color: black;
+    border-radius: 5px;
+}
+
+#entete h4 p{
+    display: inline;
+    padding: 10px;
+}
+
 center{
     padding: 25px;
 }
 
 body{
-    background-color: #d4d1d1 !important;
+    background:url("../images/background.png") no-repeat center fixed;
+    -webkit-background-size: cover; /* pour anciens Chrome et Safari */
+    background-size: cover;
 }
 
 #contenu{
@@ -25,6 +43,7 @@ center h1 img{
     border-width: 1px;
     border-color: rgb(122, 122, 218);
     border-radius: 5px;
+    background-color: rgba(202, 202, 202, 0.7);
 }
 
 #liste h4{

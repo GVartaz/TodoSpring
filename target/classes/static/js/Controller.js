@@ -9,39 +9,11 @@ app.controller('indexController',function ($scope, $http){
 })
 
 app.controller('LoginController',function($scope,$http){
-/*
-    $scope.connexion = function(){
-        var username = $scope.username;
-        var password = $scope.password;
-        $scope.warning ="";
 
-        if(typeof username === "undefined"){
-            document.getElementById("username").style.borderColor = "#FF0000";
-        }
-        else if(typeof password === "undefined"){
-            document.getElementById("password").style.borderColor = "#FF0000";
-        }
-        else {
-            var req = {
-                username : username,
-                password : password
-            };
-            document.getElementById("username").style.borderColor = null;
-            document.getElementById("password").style.borderColor = null;
-            console.log(req);
-            $http.post('/connexion',req)
-                .then(function(resp){
-                    if(resp.data == false){
-                        $scope.username = "";
-                        $scope.password = "";
-                        $scope.warning = "Identifiants incorrects";
-                    } else {
-                        alert("Connexion réussie");
-                        window.location.href = "/feed.html";
-                    }
-            });
-        }
-    };*/
+    var url = window.location.href.split("/");
+    if(url[3] == "login.html?error"){
+        $scope.warning = "Identifiants incorrects";
+    }
 })
 
 app.controller('InscriptionController',function ($scope, $http){
@@ -56,25 +28,11 @@ app.controller('InscriptionController',function ($scope, $http){
             $scope.warning = "Les 2 mots de passe ne sont pas identiques";
             return;
         }
-
-        if(typeof username === "undefined"){
-            document.getElementById("username").style.borderColor = "#FF0000";
-        }
-        else if(typeof password === "undefined"){
-            document.getElementById("password").style.borderColor = "#FF0000";
-        }
-        else if(typeof password2 === "undefined"){
-            document.getElementById("password2").style.borderColor = "#FF0000";
-        }
-        else {
             var req = {
                 username : username,
                 password : password
             };
 
-            document.getElementById("username").style.borderColor = null;
-            document.getElementById("password").style.borderColor = null;
-            document.getElementById("password2").style.borderColor = null;
             $http.post("/inscription", req)
                 .then(function (resp) {
                     console.log(resp);
@@ -87,7 +45,6 @@ app.controller('InscriptionController',function ($scope, $http){
                     $scope.username = "";
                 });
 
-        }
     };
 
 })
@@ -101,6 +58,10 @@ app.controller('MainController',function ($scope, $http) {
     $scope.refresh = function(){
         $http.get('/feed').then(function (resp) {
             $scope.tasks = resp.data;
+        });
+
+        $http.get('/user').then(function (resp) {
+            $scope.user = resp.data;
         });
     };
 

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class TaskController {
@@ -21,6 +22,12 @@ public class TaskController {
         String username = principal.getName();
         return feedService.fetchAll(username);
         //return feedService.fetchAll();
+    }
+
+    @GetMapping("/user")
+    public Optional<String> getConnectedUser(Principal p) {
+        Optional<String> username = Optional.ofNullable(p.getName());
+        return username;
     }
 
     @PostMapping("/task")

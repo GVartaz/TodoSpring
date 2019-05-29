@@ -11,14 +11,14 @@
 <body ng-controller="MainController">
 <div id="entete">
     <button id="logout" class="btn btn-dark" ng-click="logout()">Déconnexion</button>
+    <h4><img src="images/profile.png"><p>{{user}}</p></h4>
     <center><a href="index.html" style="text-decoration: none;color:inherit"><h1><img src="images/logo.png" alt="Logo Todo">My Todo List</h1></a></center>
 </div>
 <div id="contenu">
-    <!--<h2>Bienvenue {{user}}!</h2>-->
     <div id="list-form">
         <form>
             <h5>Nouvelle tache : </h5>
-            <input type="text" required="" id="newListe" placeholder="Nom de la liste" ng-model="content">
+            <input type="text" required="" id="newListe" placeholder="Nom de la tache" ng-model="content">
             <button type="submit" class="btn btn-success" ng-click="createTask()"> + </button>
             <p id="liste-warning"></p>
         </form>
@@ -31,12 +31,10 @@
                         <div id="content" ng-if="task.done">
                             <img src="images/checked.png" alt="Task done" ng-click="switch(task.id,task.done)">
                             <del>{{ task.content }}</del>
-                            <i>({{task.id}})</i>
                         </div>
                         <div id="content" ng-if="!task.done">
                             <img src="images/unchecked.png" alt="Task not done" ng-click="switch(task.id,task.done)">
                             {{ task.content }}
-                            <i>({{task.id}})</i>
                         </div>
                     </div>
                     <div id="modifTask">
@@ -67,9 +65,9 @@
 </div>
 <p id="footer">
     <i>
-        Projet App Web et Mobile - Polytech Marseille
+        Projet Archi App Entreprise - Polytech Marseille
         <br>
-        Copyright © Geoffrey VARTAZIAN 2019
+        Copyright © Thomas MARTINEZ/Geoffrey VARTAZIAN 2019
     </i>
 </p>
 </body>
