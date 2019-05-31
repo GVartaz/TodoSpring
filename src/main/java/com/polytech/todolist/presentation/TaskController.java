@@ -37,7 +37,6 @@ public class TaskController {
 
     @PutMapping("/updateTask")
     public void updateTask(@RequestBody Task task){
-        System.out.println(task.getId()+" "+task.getContent());
         publicationService.updateTask(task);
     }
 
