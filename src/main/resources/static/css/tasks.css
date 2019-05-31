@@ -46,6 +46,12 @@ center h1 img{
     margin: 25px auto;
 }
 
+#newListe{
+    width: 30%;
+    margin-right: 30px;
+    margin-left: 30px;
+}
+
 #liste h4{
     display: inline;
     padding: 2%;
@@ -74,6 +80,7 @@ center h1 img{
 
 
 #list-form{
+    text-align: center;
     padding-top: 2%;
     padding-bottom: 2%;
 }

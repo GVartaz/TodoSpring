@@ -19,7 +19,7 @@
         <form>
             <h5>Nouvelle tache : </h5>
             <input type="text" required="" id="newListe" placeholder="Nom de la tache" ng-model="content">
-            <button type="submit" class="btn btn-success" ng-click="createTask()"> + </button>
+            <button type="submit" class="btn btn-success" ng-click="createTask()">+ Ajouter</button>
             <p id="liste-warning"></p>
         </form>
     </div>
@@ -30,14 +30,14 @@
                         <!--<input type="checkbox" id="done{{x._id}}" ng-change="switch(x._id)" ng-checked="x.done" ng-model="formData.check">-->
                         <div id="content" ng-if="task.done">
                             <img src="images/checked.png" alt="Task done" ng-click="switch(task.id,task.done)">
-                            <div id="nomTache{{task.id}}" style="display: inline">
+                            <div id="nomTache{{task.id}}" style="display: inline;margin-left: 10px;">
                                 <del>{{ task.content }}</del>
                             </div>
                             <input style="display: none; margin-right: 10px;" id="text{{task.id}}" type="text" ng-model="modif">
                         </div>
                         <div id="content" ng-if="!task.done">
                             <img src="images/unchecked.png" alt="Task not done" ng-click="switch(task.id,task.done)">
-                            <div id="nomTache{{task.id}}" style="display: inline">
+                            <div id="nomTache{{task.id}}" style="display: inline;margin-left: 10px;">
                                 {{ task.content }}
                             </div>
                             <input style="display: none; margin-right: 10px;" id="text{{task.id}}" type="text" ng-model="modif">
