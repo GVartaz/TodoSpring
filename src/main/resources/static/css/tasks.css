@@ -23,7 +23,7 @@ center{
 }
 
 body{
-    background:url("../images/background.png") no-repeat center fixed;
+    background:url(../images/fond.PNG) no-repeat center fixed;
     -webkit-background-size: cover; /* pour anciens Chrome et Safari */
     background-size: cover;
 }
