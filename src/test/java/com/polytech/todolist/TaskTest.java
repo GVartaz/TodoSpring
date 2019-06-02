@@ -8,48 +8,53 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 
 import java.util.List;
 
 public class TaskTest {
     @Test
     public void should_fetch_user_task() {
-        ApplicationContext context = SpringApplication.run(AppStarter.class);
+        ConfigurableApplicationContext context = SpringApplication.run(AppStarter.class);
 
         //GIVEN
         TaskRepository taskRepository = context.getBean(TaskRepository.class);
         FeedService feedService = context.getBean(FeedServiceImpl.class);
+        List<Task> tasks = feedService.fetchAll("geoffrey");
         Task story1 = new Task("Tache 1","geoffrey");
         Task story2 = new Task("tache2","geoffrey");
         taskRepository.save(story1);
         taskRepository.save(story2);
 
         //WHEN
-        List<Task> tasks = feedService.fetchAll("geoffrey");
+        List<Task> tasks2 = feedService.fetchAll("geoffrey");
 
 
         //THEN
-        Assert.assertEquals(2,tasks.size());
+        Assert.assertEquals(tasks.size()+2,tasks2.size());
+        context.close();
 
     }
 
     @Test
     public void should_delete_user_task() {
-        ApplicationContext context = SpringApplication.run(AppStarter.class);
+        ConfigurableApplicationContext context = SpringApplication.run(AppStarter.class);
 
         //GIVEN
         TaskRepository taskRepository = context.getBean(TaskRepository.class);
         FeedService feedService = context.getBean(FeedServiceImpl.class);
         Task t1 = new Task("delete","geoffrey");
         taskRepository.save(t1);
+        List<Task> tasks = feedService.fetchAll("geoffrey");
         taskRepository.deleteTask(t1.getId());
 
         //WHEN
-        List<Task> tasks = feedService.fetchAll("geoffrey");
+        List<Task> tasks2 = feedService.fetchAll("geoffrey");
 
 
         //THEN
-        Assert.assertEquals(0,tasks.size());
+        Assert.assertEquals(tasks.size()-1,tasks2.size());
+        context.close();
 
     }
 

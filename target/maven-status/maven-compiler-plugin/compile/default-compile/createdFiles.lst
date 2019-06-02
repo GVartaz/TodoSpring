@@ -1,0 +1,16 @@
+com\polytech\todolist\data\TaskRepository.class
+com\polytech\todolist\data\LoginRepository.class
+com\polytech\todolist\application\Users.class
+com\polytech\todolist\data\JpaLoginRepository.class
+com\polytech\todolist\application\FeedService.class
+com\polytech\todolist\application\FeedServiceImpl.class
+com\polytech\todolist\application\UserService.class
+com\polytech\todolist\config\AppConfig.class
+com\polytech\todolist\config\SecurityConfig.class
+com\polytech\todolist\application\Task.class
+com\polytech\todolist\presentation\TaskController.class
+com\polytech\todolist\application\PublicationService.class
+com\polytech\todolist\data\JpaTaskRepository.class
+com\polytech\todolist\presentation\LoginController.class
+com\polytech\todolist\application\Authorities.class
+com\polytech\todolist\AppStarter.class

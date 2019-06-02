@@ -7,6 +7,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.List;
 
@@ -14,7 +16,7 @@ public class UserTest {
 
     @Test
     public void should_register_user() {
-        ApplicationContext context = SpringApplication.run(AppStarter.class);
+        ConfigurableApplicationContext context = SpringApplication.run(AppStarter.class);
 
         //GIVEN
         LoginRepository loginRepository = context.getBean(LoginRepository.class);
@@ -28,6 +30,7 @@ public class UserTest {
 
         //THEN
         Assert.assertEquals(true,user);
+        context.close();
 
     }
 
